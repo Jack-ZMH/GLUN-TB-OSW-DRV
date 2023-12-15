@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "sys.h": "c",
+        "bsp_nxp9698.h": "c",
+        "bsp_c1x2g.h": "c"
+    }
+}

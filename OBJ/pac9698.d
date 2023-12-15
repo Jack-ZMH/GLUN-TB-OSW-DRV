@@ -1,0 +1,2 @@
+..\obj\pac9698.o: ..\HARDWARE\PAC9698\PAC9698.c
+..\obj\pac9698.o: ..\HARDWARE\PAC9698\pac9698.h
