@@ -103,7 +103,7 @@ void Latch_S1X8_COM_P5(uint16_t time);
 void Latch_S1X8_COM_P6(uint16_t time);
 void Latch_S1X8_COM_P7(uint16_t time);
 void Latch_S1X8_COM_P8(uint16_t time);
-void Latch_S1X8_CHENCH(uint16_t time,uint32_t num);
+void Latch_S1X8_CHENCH(uint16_t time,uint32_t num,LockTypedef SwitchType);
 
 void NonLatch_S1X8_COM_P1(uint16_t time);
 void NonLatch_S1X8_COM_P2(uint16_t time);
@@ -113,7 +113,6 @@ void NonLatch_S1X8_COM_P5(uint16_t time);
 void NonLatch_S1X8_COM_P6(uint16_t time);
 void NonLatch_S1X8_COM_P7(uint16_t time);
 void NonLatch_S1X8_COM_P8(uint16_t time);
-void NonLatch_S1X8_CHENCH(uint16_t time,uint32_t num);
 
 #endif
 

@@ -69,19 +69,18 @@ void S1X4_GPIO_Init(void);
 
 /// @brief Lacthing Switch
 /// @param  
-void Latch_S1X4_CHENCK(uint16_t time,uint32_t num);
-void Latch_S1X4_COMP1(void);
-void Latch_S1X4_COMP2(void);
-void Latch_S1X4_COMP3(void);
-void Latch_S1X4_COMP4(void);
+void S1X4_CHENCK(uint16_t time,uint32_t num,LockTypedef SwitchType);
+void Latch_S1X4_COMP1(uint16_t time);
+void Latch_S1X4_COMP2(uint16_t time);
+void Latch_S1X4_COMP3(uint16_t time);
+void Latch_S1X4_COMP4(uint16_t time);
 
 
 /// @brief Non-Lacthing Switch
 /// @param 
-void NonLatch_S1X4_CHENCK(uint16_t time,uint32_t num);
-void NonLatch_S1X4_COMP1(void);
-void NonLatch_S1X4_COMP2(void);
-void NonLatch_S1X4_COMP3(void);
-void NonLatch_S1X4_COMP4(void);
+void NonLatch_S1X4_COMP1(uint16_t time);
+void NonLatch_S1X4_COMP2(uint16_t time);
+void NonLatch_S1X4_COMP3(uint16_t time);
+void NonLatch_S1X4_COMP4(uint16_t time);
 #endif
 

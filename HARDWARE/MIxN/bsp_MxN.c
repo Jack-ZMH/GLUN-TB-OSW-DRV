@@ -26,21 +26,8 @@ void M1X1_CHENCK(uint16_t time,uint32_t num)
 	while(num--){
 	
 		if(Switch==ON){
-			
-			M1X1_GPIO_H();
-			delay_ms(20);
-			
-			if(READ_TwoPin(M1X1_READ_PORT,M1X1_READ_PIN2,M1X1_READ_PIN7)) 
-				printf("M1X1_StateA error\n");
-			else 
-				printf("M1X1_StateA Normal\n");
-			
-			M1X1_GPIO_L();
-			delay_ms(20);
-			if(READ_TwoPin(M1X1_READ_PORT,M1X1_READ_PIN4,M1X1_READ_PIN5))
-				printf("M1X1_StateB error\n");
-			else 
-				printf("M1X1_StateB Normal\n");
+			M1X1_StateA(time);
+			M1X1_StateB(time);
 		}
 		else{
 		
@@ -51,20 +38,20 @@ void M1X1_CHENCK(uint16_t time,uint32_t num)
 
 }
 
-void M1X1_StateA(void)
+void M1X1_StateA(uint16_t time)
 {
 	M1X1_GPIO_H();
-	delay_ms(20);
+	delay_ms(time);
 	if(READ_TwoPin(M1X1_READ_PORT,M1X1_READ_PIN2,M1X1_READ_PIN7)) 
 		printf("M1X1_StateA error\n");
 	else 
 		printf("M1X1_StateA Normal\n");
 }
 
-void M1X1_StateB(void)
+void M1X1_StateB(uint16_t time)
 {
 	M1X1_GPIO_L();
-	delay_ms(20);
+	delay_ms(time);
 	if(READ_TwoPin(M1X1_READ_PORT,M1X1_READ_PIN4,M1X1_READ_PIN5))
 		printf("M1X1_StateB error\n");
 	else 

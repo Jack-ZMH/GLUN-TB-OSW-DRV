@@ -44,72 +44,29 @@ void S1X4_GPIO_Init(void)
 /// @brief 重复检测
 /// @param time 
 /// @param num 
-void Latch_S1X4_CHENCK(uint16_t time,uint32_t num)
+void S1X4_CHENCK(uint16_t time,uint32_t num,LockTypedef SwitchType)
 {	
     // 轮询切换四种状态
 	while(num--) {	
 		if(Switch){
-            //状态A
-            //A
-            S1X4_A_GPIO_MA_H();
-            S1X4_A_GPIO_MB_L();
-            S1X4_A_GPIO_CTRL_H();
-            //B
-            S1X4_B_GPIO_MA_H();
-            S1X4_B_GPIO_MB_L();
-            S1X4_B_GPIO_CTRL_H();
-            delay_ms(time);
-            if(READ_TwoPin(S1X4_A_READ_PORT1,S1X4_A_READ_PIN4,S1X4_A_READ_PIN7) &&
-               READ_TwoPin(S1X4_B_READ_PORT,S1X4_B_READ_PIN4,S1X4_B_READ_PIN7))
-               printf("S1X4 COM-P1 Erroe\n");
-            else
-                printf("S1X4 COM-P1 Nermol\n");
-            
-            //状态B
-            //A
-            S1X4_A_GPIO_MA_L();
-            S1X4_A_GPIO_MB_L();
-            S1X4_A_GPIO_CTRL_L();
-            //B
-            S1X4_B_GPIO_CTRL_H();
-            S1X4_B_GPIO_MB_L();
-            S1X4_B_GPIO_CTRL_H();
-             delay_ms(time);
-            if(READ_TwoPin(S1X4_A_READ_PORT2,S1X4_A_READ_PIN2,S1X4_A_READ_PIN9) && 
-               READ_TwoPin(S1X4_B_READ_PORT,S1X4_B_READ_PIN4,S1X4_B_READ_PIN7))
-                printf("S1X4 COM-P2 Erroe\n");
-            else
-                printf("S1X4 COM-P2 Nermol\n");
-            //状态C
-            //A
-            S1X4_A_GPIO_MA_H();
-            S1X4_A_GPIO_MB_L();
-            S1X4_A_GPIO_CTRL_H();
-            //B
-            S1X4_B_GPIO_MA_L();
-            S1X4_B_GPIO_MB_L();
-            S1X4_B_GPIO_CTRL_L();
-            delay_ms(time);
-            if(READ_TwoPin(S1X4_A_READ_PORT1,S1X4_A_READ_PIN4,S1X4_A_READ_PIN7) &&
-               READ_TwoPin(S1X4_B_READ_PORT,S1X4_B_READ_PIN2,S1X4_B_READ_PIN9))
-                printf("S1X4 COM-P3 Erroe\n");
-            else
-                printf("S1X4 COM-P3 Nermol\n");
-            //状态D
-            //A
-            S1X4_A_GPIO_MA_L();
-            S1X4_A_GPIO_MB_L();
-            S1X4_A_GPIO_CTRL_L();
-            //b
-            S1X4_B_GPIO_MA_L();
-            S1X4_B_GPIO_MB_L();
-            S1X4_B_GPIO_CTRL_L();
-             delay_ms(time);
-            if(READ_TwoPin(S1X4_A_READ_PORT2,S1X4_A_READ_PIN2,S1X4_A_READ_PIN9) &&
-               READ_TwoPin(S1X4_B_READ_PORT,S1X4_B_READ_PIN2,S1X4_B_READ_PIN9))
-                printf("S1X4 COM-P4 Erroe\n");
-            else
-                printf("S1X4 COM-P4 Nermol\n"); 
+            if( SwitchType == lock)
+			{
+				Latch_S1X4_COMP1(time);
+				Latch_S1X4_COMP2(time);
+				Latch_S1X4_COMP3(time);
+			    Latch_S1X4_COMP4(time);
+			}
+			else if(SwitchType == nolock)
+			{
+				NonLatch_S1X4_COMP1(time);
+			    NonLatch_S1X4_COMP2(time);
+			    NonLatch_S1X4_COMP3(time);
+			    NonLatch_S1X4_COMP4(time);
+			}
+			else 
+			{
+				printf("S1X4 Typedef Error\n");
+			}
 
 		}
 		else {	
@@ -121,7 +78,7 @@ void Latch_S1X4_CHENCK(uint16_t time,uint32_t num)
 
 /// @brief Latch_S1X4_COMP1
 /// @param  
-void Latch_S1X4_COMP1(void)
+void Latch_S1X4_COMP1(uint16_t time)
 {
     //状态A
     //A
@@ -132,8 +89,8 @@ void Latch_S1X4_COMP1(void)
     S1X4_B_GPIO_MA_H();
     S1X4_B_GPIO_MB_L();
     S1X4_B_GPIO_CTRL_H();
-    delay_ms(20);
-    if(READ_TwoPin(S1X4_A_READ_PORT1,S1X4_A_READ_PIN4,S1X4_A_READ_PIN7) &&
+    delay_ms(time);
+    if(READ_TwoPin(S1X4_A_READ_PORT1,S1X4_A_READ_PIN4,S1X4_A_READ_PIN7) ||
        READ_TwoPin(S1X4_B_READ_PORT,S1X4_B_READ_PIN4,S1X4_B_READ_PIN7))
        printf("S1X4 COM-P1 Erroe\n");
     else
@@ -142,7 +99,7 @@ void Latch_S1X4_COMP1(void)
 
 /// @brief Latch_S1X4_COMP2
 /// @param  
-void Latch_S1X4_COMP2(void)
+void Latch_S1X4_COMP2(uint16_t time)
 {
     //状态B
     //A
@@ -150,11 +107,11 @@ void Latch_S1X4_COMP2(void)
     S1X4_A_GPIO_MB_L();
     S1X4_A_GPIO_CTRL_L();
     //B
-    S1X4_B_GPIO_CTRL_H();
+    S1X4_B_GPIO_MA_H();
     S1X4_B_GPIO_MB_L();
     S1X4_B_GPIO_CTRL_H();
-     delay_ms(20);
-    if(READ_TwoPin(S1X4_A_READ_PORT2,S1X4_A_READ_PIN2,S1X4_A_READ_PIN9) && 
+     delay_ms(time);
+    if(READ_TwoPin(S1X4_A_READ_PORT2,S1X4_A_READ_PIN2,S1X4_A_READ_PIN9) || 
        READ_TwoPin(S1X4_B_READ_PORT,S1X4_B_READ_PIN4,S1X4_B_READ_PIN7))
         printf("S1X4 COM-P2 Erroe\n");
     else
@@ -163,7 +120,7 @@ void Latch_S1X4_COMP2(void)
 
 /// @brief Latch_S1X4_COMP3
 /// @param  
-void Latch_S1X4_COMP3(void)
+void Latch_S1X4_COMP3(uint16_t time)
 {
     //状态C
     //A
@@ -174,8 +131,8 @@ void Latch_S1X4_COMP3(void)
     S1X4_B_GPIO_MA_L();
     S1X4_B_GPIO_MB_L();
     S1X4_B_GPIO_CTRL_L();
-    delay_ms(20);
-    if(READ_TwoPin(S1X4_A_READ_PORT1,S1X4_A_READ_PIN4,S1X4_A_READ_PIN7) &&
+    delay_ms(time);
+    if(READ_TwoPin(S1X4_A_READ_PORT1,S1X4_A_READ_PIN4,S1X4_A_READ_PIN7) ||
        READ_TwoPin(S1X4_B_READ_PORT,S1X4_B_READ_PIN2,S1X4_B_READ_PIN9))
         printf("S1X4 COM-P3 Erroe\n");
     else
@@ -184,7 +141,7 @@ void Latch_S1X4_COMP3(void)
 
 /// @brief Latch_S1X4_COMP4
 /// @param  
-void Latch_S1X4_COMP4(void)
+void Latch_S1X4_COMP4(uint16_t time)
 {
     //状态D
     //A
@@ -195,8 +152,8 @@ void Latch_S1X4_COMP4(void)
     S1X4_B_GPIO_MA_L();
     S1X4_B_GPIO_MB_L();
     S1X4_B_GPIO_CTRL_L();
-     delay_ms(20);
-    if(READ_TwoPin(S1X4_A_READ_PORT2,S1X4_A_READ_PIN2,S1X4_A_READ_PIN9) &&
+     delay_ms(time);
+    if(READ_TwoPin(S1X4_A_READ_PORT2,S1X4_A_READ_PIN2,S1X4_A_READ_PIN9) ||
        READ_TwoPin(S1X4_B_READ_PORT,S1X4_B_READ_PIN2,S1X4_B_READ_PIN9))
         printf("S1X4 COM-P4 Erroe\n");
     else
@@ -205,97 +162,19 @@ void Latch_S1X4_COMP4(void)
 }
 
 
-/// @brief NonLatch_S1X4_CHENCK
-/// @param time 
-/// @param num 
-void NonLatch_S1X4_CHENCK(uint16_t time,uint32_t num)
-{
-    while (num--)
-    {
-        if(Switch){
-            //状态A
-            //A
-            S1X4_A_GPIO_CTRL_L();
-            S1X4_A_GPIO_MA_H();
-            S1X4_A_GPIO_MB_L();
-            //B
-            S1X4_B_GPIO_CTRL_L();
-            S1X4_B_GPIO_MA_H();
-            S1X4_B_GPIO_MB_L();
-            delay_ms(time);
-            if(READ_TwoPin(S1X4_A_READ_PORT1,S1X4_A_READ_PIN4,S1X4_A_READ_PIN7) &&
-               READ_TwoPin(S1X4_B_READ_PORT,S1X4_B_READ_PIN4,S1X4_B_READ_PIN7))
-                printf("Non latch S1X4 COM-P1 Erroe\n");
-            else
-                printf("Non latch S1X4 COM-P1 Nermol\n");
-
-            //状态b
-            //A
-            S1X4_A_GPIO_CTRL_L();
-            S1X4_A_GPIO_MA_L();
-            S1X4_A_GPIO_MB_L();
-            //B
-            S1X4_B_GPIO_CTRL_L();
-            S1X4_B_GPIO_MA_H();
-            S1X4_B_GPIO_MB_L();
-            delay_ms(time);
-            if(READ_TwoPin(S1X4_A_READ_PORT2,S1X4_A_READ_PIN2,S1X4_A_READ_PIN9) &&
-               READ_TwoPin(S1X4_B_READ_PORT,S1X4_B_READ_PIN4,S1X4_B_READ_PIN7))
-                printf("Non latch S1X4 COM-P2 Erroe\n");
-            else
-                printf("Non latch S1X4 COM-P2 Nermol\n");
-
-            //状态c   
-            //A
-            S1X4_A_GPIO_CTRL_L();
-            S1X4_A_GPIO_MA_H();
-            S1X4_A_GPIO_MB_L();
-            //b
-            S1X4_B_GPIO_CTRL_L();
-            S1X4_B_GPIO_MA_L();
-            S1X4_B_GPIO_MB_L();
-            delay_ms(time);
-            if(READ_TwoPin(S1X4_A_READ_PORT1,S1X4_A_READ_PIN4,S1X4_A_READ_PIN7) &&
-               READ_TwoPin(S1X4_B_READ_PORT,S1X4_B_READ_PIN2,S1X4_B_READ_PIN9))
-                printf("Non latch S1X4 COM-P3 Erroe\n");
-            else
-                printf("Non latch S1X4 COM-P3 Nermol\n");
-
-            //状态D
-            //A
-            S1X4_A_GPIO_CTRL_L();
-            S1X4_A_GPIO_MA_L();
-            S1X4_A_GPIO_MB_L();
-            //b
-            S1X4_B_GPIO_CTRL_L();
-            S1X4_B_GPIO_MA_L();
-            S1X4_B_GPIO_MB_L();
-            delay_ms(time);
-            if(READ_TwoPin(S1X4_A_READ_PORT2,S1X4_A_READ_PIN2,S1X4_A_READ_PIN9) &&
-               READ_TwoPin(S1X4_B_READ_PORT,S1X4_B_READ_PIN2,S1X4_B_READ_PIN9))
-                printf("Non latch S1X4 COM-P3 Erroe\n");
-            else
-                printf("Non latch S1X4 COM-P3 Nermol\n");
-        
-        }
-    }
-}
 
 /// @brief NonLatch_S1X4_COMP1
 /// @param  
-void NonLatch_S1X4_COMP1(void)
+void NonLatch_S1X4_COMP1(uint16_t time)
 {
     //状态A
     //A
-    S1X4_A_GPIO_CTRL_L();
-    S1X4_A_GPIO_MA_H();
-    S1X4_A_GPIO_MB_L();
+    S1X4_A_GPIO_CTRL_H();
     //B
-    S1X4_B_GPIO_CTRL_L();
-    S1X4_B_GPIO_MA_H();
-    S1X4_B_GPIO_MB_L();
-    delay_ms(20);
-    if(READ_TwoPin(S1X4_A_READ_PORT1,S1X4_A_READ_PIN4,S1X4_A_READ_PIN7) &&
+    S1X4_B_GPIO_CTRL_H();
+
+    delay_ms(time);
+    if(READ_TwoPin(S1X4_A_READ_PORT1,S1X4_A_READ_PIN4,S1X4_A_READ_PIN7) ||
        READ_TwoPin(S1X4_B_READ_PORT,S1X4_B_READ_PIN4,S1X4_B_READ_PIN7))
         printf("Non latch S1X4 COM-P1 Erroe\n");
     else
@@ -305,19 +184,16 @@ void NonLatch_S1X4_COMP1(void)
 
 /// @brief NonLatch_S1X4_COMP2
 /// @param  
-void NonLatch_S1X4_COMP2(void)
+void NonLatch_S1X4_COMP2(uint16_t time)
 {
     //状态b
     //A
     S1X4_A_GPIO_CTRL_L();
-    S1X4_A_GPIO_MA_L();
-    S1X4_A_GPIO_MB_L();
     //B
-    S1X4_B_GPIO_CTRL_L();
-    S1X4_B_GPIO_MA_H();
-    S1X4_B_GPIO_MB_L();
-    delay_ms(20);
-    if(READ_TwoPin(S1X4_A_READ_PORT2,S1X4_A_READ_PIN2,S1X4_A_READ_PIN9) &&
+    S1X4_B_GPIO_CTRL_H();
+
+    delay_ms(time);
+    if(READ_TwoPin(S1X4_A_READ_PORT2,S1X4_A_READ_PIN2,S1X4_A_READ_PIN9) ||
        READ_TwoPin(S1X4_B_READ_PORT,S1X4_B_READ_PIN4,S1X4_B_READ_PIN7))
         printf("Non latch S1X4 COM-P2 Erroe\n");
     else
@@ -327,19 +203,16 @@ void NonLatch_S1X4_COMP2(void)
 
 /// @brief NonLatch_S1X4_COMP3
 /// @param  
-void NonLatch_S1X4_COMP3(void)
+void NonLatch_S1X4_COMP3(uint16_t time)
 {
     //状态c   
     //A
-    S1X4_A_GPIO_CTRL_L();
-    S1X4_A_GPIO_MA_H();
-    S1X4_A_GPIO_MB_L();
+    S1X4_A_GPIO_CTRL_H();
     //b
     S1X4_B_GPIO_CTRL_L();
-    S1X4_B_GPIO_MA_L();
-    S1X4_B_GPIO_MB_L();
-    delay_ms(20);
-    if(READ_TwoPin(S1X4_A_READ_PORT1,S1X4_A_READ_PIN4,S1X4_A_READ_PIN7) &&
+
+    delay_ms(time);
+    if(READ_TwoPin(S1X4_A_READ_PORT1,S1X4_A_READ_PIN4,S1X4_A_READ_PIN7) ||
        READ_TwoPin(S1X4_B_READ_PORT,S1X4_B_READ_PIN2,S1X4_B_READ_PIN9))
         printf("Non latch S1X4 COM-P3 Erroe\n");
     else
@@ -349,19 +222,16 @@ void NonLatch_S1X4_COMP3(void)
 
 /// @brief NonLatch_S1X4_COMP4
 /// @param  
-void NonLatch_S1X4_COMP4(void)
+void NonLatch_S1X4_COMP4(uint16_t time)
 {
     //状态D
     //A
     S1X4_A_GPIO_CTRL_L();
-    S1X4_A_GPIO_MA_L();
-    S1X4_A_GPIO_MB_L();
     //b
     S1X4_B_GPIO_CTRL_L();
-    S1X4_B_GPIO_MA_L();
-    S1X4_B_GPIO_MB_L();
-    delay_ms(20);
-    if(READ_TwoPin(S1X4_A_READ_PORT2,S1X4_A_READ_PIN2,S1X4_A_READ_PIN9) &&
+
+    delay_ms(time);
+    if(READ_TwoPin(S1X4_A_READ_PORT2,S1X4_A_READ_PIN2,S1X4_A_READ_PIN9) ||
        READ_TwoPin(S1X4_B_READ_PORT,S1X4_B_READ_PIN2,S1X4_B_READ_PIN9))
         printf("Non latch S1X4 COM-P3 Erroe\n");
     else

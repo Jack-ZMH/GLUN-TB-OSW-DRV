@@ -57,30 +57,34 @@ void C1X2G_CHENCK(uint16_t time,uint32_t num,LockTypedef SwitchType)
 	}   
 }
 
+
 /// @brief C1X2_SateA
 /// @param  
 void Latch_C1X2_StateA(uint16_t time)
 {
-	C1X2G_GPIO_MA_L();
-	C1X2G_GPIO_CTRL_H();
-	C1X2G_GPIO_MB_H();
+	// 0 0 0 1
+	C1X2G_GPIO_MA_H();//PIN5
+	C1X2G_GPIO_CTRL_H();//PIN6
+	C1X2G_GPIO_MB_L();//PIN10
 	delay_ms(time);
-	if(READ_TwoPin(C1X2G_READ_PORT,C1X2G_READ_MA_PIN4,C1X2G_READ_MB_PIN7))
-		printf("Latch_C1X2G_MA Error\n");	
+	if(READ_TwoPin(C1X2G_READ_PORT,C1X2G_READ_MA_PIN2,C1X2G_READ_MB_PIN9))
+		printf("Latch_C1X2G_MA Error\n");
 	else 
 		printf("Latch_C1X2G_MA Normel\n");
 }
+
 
 /// @brief C1X2_SateB
 /// @param  
 void Latch_C1X2_StateB(uint16_t time)
 {
-	C1X2G_GPIO_MA_H();
-	C1X2G_GPIO_CTRL_H();
-	C1X2G_GPIO_MB_L();
+	// 1 0 0 0
+	C1X2G_GPIO_MA_L(); //PIN5
+	C1X2G_GPIO_CTRL_H(); //PIN6
+	C1X2G_GPIO_MB_H(); //PIN10
 	delay_ms(time);
-	if(READ_TwoPin(C1X2G_READ_PORT,C1X2G_READ_MA_PIN2,C1X2G_READ_MB_PIN9))
-		printf("Latch_C1X2G_MB Error\n");
+	if(READ_TwoPin(C1X2G_READ_PORT,C1X2G_READ_MA_PIN4,C1X2G_READ_MB_PIN7))
+		printf("Latch_C1X2G_MB Error\n");	
 	else 
 		printf("Latch_C1X2G_MB Normel\n");
 }

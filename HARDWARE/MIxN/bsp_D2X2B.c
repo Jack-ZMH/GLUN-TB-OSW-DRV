@@ -19,6 +19,7 @@ void D2X2B_GPIO_Init(void)
     GPIO_InitStruct.Pin = D2X2B_GPIO_MB_PIN;
     HAL_GPIO_Init(D2X2B_GPIO_MB_PORT, &GPIO_InitStruct);
 	
+	//ÉÏµçÄ¬ÈÏ
 	D2X2B_GPIO_MA_H();
 	D2X2B_GPIO_MB_H();
 } 
@@ -33,28 +34,12 @@ void D2X2B_CHENCK(uint16_t time,uint32_t num)
 	{	
 		if(Switch)
 		{
-			D2X2B_GPIO_MA_L();
-			D2X2B_GPIO_MB_H();
-			delay_ms(time);
-			if(PCA_GPIO_ReadPin(D2X2B_READ_PORT2,D2X2B_READ_MA_PIN3)&&
-			   PCA_GPIO_ReadPin(D2X2B_READ_PORT1,D2X2B_READ_MB_PIN10))
-				printf("D2X2B_Cross Error\n");
-			else	
-				printf("D2X2B_Cross Normel\n");
-			  
-			
-			D2X2B_GPIO_MA_H();
-			D2X2B_GPIO_MB_L();
-			delay_ms(time);	
-			if(READ_TwoPin(D2X2B_READ_PORT1,D2X2B_READ_MA_PIN5,D2X2B_READ_MB_PIN8))
-				printf("D2X2B_Bar Error\n");
-			else 
-				printf("D2X2B_Bar Normel\n");
-			 
+			D2X2B_State_Cross(time);
+			D2X2B_State_Bar(time);
 		}
 		else 
 		{
-			printf("C1X2G STOP\n");
+			printf("C1X2G Switch:%d\n",Switch);
 			num = 0;
 		}
 	}   
@@ -62,20 +47,29 @@ void D2X2B_CHENCK(uint16_t time,uint32_t num)
 
 /// @brief ÇÐ»»ÎªCross×´Ì¬
 /// @param  
-void D2X2B_State_Cross(void)
+void D2X2B_State_Cross(uint16_t time)
 {
 	D2X2B_GPIO_MA_L();
 	D2X2B_GPIO_MB_H();
-	delay_ms(20);	 
+	delay_ms(time);
+	if(PCA_GPIO_ReadPin(D2X2B_READ_PORT2,D2X2B_READ_MA_PIN3)||
+	   PCA_GPIO_ReadPin(D2X2B_READ_PORT1,D2X2B_READ_MB_PIN10))
+		printf("D2X2B_Cross Error\n");
+	else	
+		printf("D2X2B_Cross Normel\n");	
 }
 
 /// @brief ÇÐ»»ÎªBar×´Ì¬
 /// @param  
-void D2X2B_State_Bar(void)
+void D2X2B_State_Bar(uint16_t time)
 {
 	D2X2B_GPIO_MA_H();
 	D2X2B_GPIO_MB_L();
-	delay_ms(20);	 
+	delay_ms(time);
+	if(READ_TwoPin(D2X2B_READ_PORT1,D2X2B_READ_MA_PIN5,D2X2B_READ_MB_PIN8))
+		printf("D2X2B_Bar Error\n");
+	else 
+		printf("D2X2B_Bar Normel\n");	
 }
 
 

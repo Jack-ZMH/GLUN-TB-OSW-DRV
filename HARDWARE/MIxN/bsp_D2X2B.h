@@ -29,8 +29,8 @@
 
 void D2X2B_GPIO_Init(void);
 void D2X2B_CHENCK(uint16_t time,uint32_t num);
-void D2X2B_State_Cross(void);
-void D2X2B_State_Bar(void);
+void D2X2B_State_Cross(uint16_t time);
+void D2X2B_State_Bar(uint16_t time);
 
 #endif
 

@@ -37,8 +37,8 @@ extern Switch_Status Switch;
 
 void M1X1_GPIO_Init(void);
 void M1X1_CHENCK(uint16_t time,uint32_t num);
-void M1X1_StateA(void);
-void M1X1_StateB(void);
+void M1X1_StateA(uint16_t time);
+void M1X1_StateB(uint16_t time);
 
 #endif
 

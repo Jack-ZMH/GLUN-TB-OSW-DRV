@@ -1,6 +1,7 @@
 #include "bsp_S1X8.h"
 
-
+/// @brief S1X8_GPIO_Init
+/// @param  
 void S1X8_GPIO_Init(void)
 {
     GPIO_InitTypeDef  GPIO_InitStruct;
@@ -50,21 +51,39 @@ void S1X8_GPIO_Init(void)
 /// @brief Latch_S1X8_CHENCH
 /// @param time 
 /// @param num 
-void Latch_S1X8_CHENCH(uint16_t time,uint32_t num)
+void Latch_S1X8_CHENCH(uint16_t time,uint32_t num,LockTypedef SwitchType)
 {
     while (num--)
     {
         /* code */
         if(Switch)
-        {           
-            Latch_S1X8_COM_P1(time);
-            Latch_S1X8_COM_P2(time);
-            Latch_S1X8_COM_P3(time);
-            Latch_S1X8_COM_P4(time);
-            Latch_S1X8_COM_P5(time);
-            Latch_S1X8_COM_P6(time);
-            Latch_S1X8_COM_P7(time);
-            Latch_S1X8_COM_P8(time);
+        {   
+			if(SwitchType == lock)
+			{	
+				Latch_S1X8_COM_P1(time);
+				Latch_S1X8_COM_P2(time);
+				Latch_S1X8_COM_P3(time);
+				Latch_S1X8_COM_P4(time);
+				Latch_S1X8_COM_P5(time);
+				Latch_S1X8_COM_P6(time);
+				Latch_S1X8_COM_P7(time);
+				Latch_S1X8_COM_P8(time);
+			}
+			else if(SwitchType == nolock)
+			{
+				NonLatch_S1X8_COM_P1(time);
+			    NonLatch_S1X8_COM_P2(time);
+			    NonLatch_S1X8_COM_P3(time);
+			    NonLatch_S1X8_COM_P4(time);
+			    NonLatch_S1X8_COM_P5(time);
+			    NonLatch_S1X8_COM_P6(time);
+			    NonLatch_S1X8_COM_P7(time);
+				NonLatch_S1X8_COM_P8(time);
+			} 
+			else 
+			{
+				printf("S1X8 Typedef Error\n");
+			}
         }
         else
         {

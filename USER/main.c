@@ -120,8 +120,8 @@ void C1X2G_StateSwitch(CMD_Parame *parame)
 {
 	
 	switch(*parame->para){
-		case 'A':Latch_C1X2_StateA(25);break;
-		case 'B':Latch_C1X2_StateB(25);break;
+		case 'A':Latch_C1X2_StateA(20);break;
+		case 'B':Latch_C1X2_StateB(20);break;
 		default:printf("C1X2G State Error\n");
 			break;
 	}

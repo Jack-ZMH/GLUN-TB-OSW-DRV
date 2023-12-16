@@ -34,8 +34,10 @@
 
 void C1X2G_GPIO_Init(void);
 void C1X2G_CHENCK(uint16_t time,uint32_t num,LockTypedef lock);
+
 void Latch_C1X2_StateA(uint16_t time);
 void Latch_C1X2_StateB(uint16_t time);
+
 void NonLatch_C1X2_StateA(uint16_t time);
 void NonLatch_C1X2_StateA(uint16_t time);
 
