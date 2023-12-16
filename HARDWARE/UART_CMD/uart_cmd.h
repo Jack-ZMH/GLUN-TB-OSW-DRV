@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <ctype.h>
+#include "bsp_MxN.h"
 #include "sys.h"
 
 #define MAX_CMD_LEN 20
@@ -32,7 +33,9 @@ typedef struct Cmd_Class
 typedef struct CMD_ParameTypeDef
 {
 	string cmd;
-	string para;
+	LockTypedef type;
+	uint16_t timer;
+	SwitchStatusTypedef status;
 	uint16_t parame1;
 	uint32_t parame2;
 	

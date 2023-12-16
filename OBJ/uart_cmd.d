@@ -5,6 +5,7 @@
 ..\obj\uart_cmd.o: D:\ProgramFiles\Keil5\ARM\ARMCC\Bin\..\include\stdlib.h
 ..\obj\uart_cmd.o: D:\ProgramFiles\Keil5\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\uart_cmd.o: D:\ProgramFiles\Keil5\ARM\ARMCC\Bin\..\include\ctype.h
+..\obj\uart_cmd.o: ..\HARDWARE\MIxN\bsp_MxN.h
 ..\obj\uart_cmd.o: ..\SYSTEM\sys\sys.h
 ..\obj\uart_cmd.o: ..\USER\stm32f4xx.h
 ..\obj\uart_cmd.o: ..\USER\stm32f411xe.h
@@ -77,3 +78,6 @@
 ..\obj\uart_cmd.o: ..\HARDWARE\TIMER\timer.h
 ..\obj\uart_cmd.o: ..\SYSTEM\delay\delay.h
 ..\obj\uart_cmd.o: ..\HARDWARE\ADC\adc.h
+..\obj\uart_cmd.o: ..\HARDWARE\NXP9868\bsp_nxp9698.h
+..\obj\uart_cmd.o: ..\HARDWARE\IIC\bsp_i2c.h
+..\obj\uart_cmd.o: ..\HARDWARE\IIC\i2c_device.h

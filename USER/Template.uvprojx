@@ -629,11 +629,6 @@
               <FilePath>..\HARDWARE\TIMER\timer.c</FilePath>
             </File>
             <File>
-              <FileName>key.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\HARDWARE\KEY\key.c</FilePath>
-            </File>
-            <File>
               <FileName>bsp_i2c.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\bsp_i2c.c</FilePath>
@@ -687,6 +682,11 @@
               <FileName>bsp_S1X8.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\MIxN\bsp_S1X8.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\KEY\bsp_key.c</FilePath>
             </File>
           </Files>
         </Group>

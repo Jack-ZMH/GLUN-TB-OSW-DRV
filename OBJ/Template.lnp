@@ -39,7 +39,6 @@
 "..\obj\stm32f4xx_hal_i2c_ex.o"
 "..\obj\adc.o"
 "..\obj\timer.o"
-"..\obj\key.o"
 "..\obj\bsp_i2c.o"
 "..\obj\ad517x_lib.o"
 "..\obj\bsp_nxp9698.o"
@@ -51,6 +50,7 @@
 "..\obj\bsp_m1x4.o"
 "..\obj\bsp_s1x4.o"
 "..\obj\bsp_s1x8.o"
+"..\obj\bsp_key.o"
 --library_type=microlib --strict --scatter "..\OBJ\Template.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

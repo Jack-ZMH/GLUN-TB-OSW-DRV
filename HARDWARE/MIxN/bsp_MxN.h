@@ -32,6 +32,18 @@ typedef enum LockTypedef
 	nolock
 }LockTypedef;
 
+typedef enum SwitchStatusTypedef
+{
+	A  = 0,
+	B,
+	C,
+	D,
+	E,
+	F,
+	G,
+	H
+}SwitchStatusTypedef;
+
 
 extern Switch_Status Switch;
 

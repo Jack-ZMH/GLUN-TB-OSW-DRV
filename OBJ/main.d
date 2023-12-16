@@ -83,6 +83,7 @@
 ..\obj\main.o: D:\ProgramFiles\Keil5\ARM\ARMCC\Bin\..\include\stdlib.h
 ..\obj\main.o: D:\ProgramFiles\Keil5\ARM\ARMCC\Bin\..\include\ctype.h
 ..\obj\main.o: ..\HARDWARE\MIxN\bsp_MxN.h
+..\obj\main.o: ..\HARDWARE\KEY\bsp_key.h
 ..\obj\main.o: ..\HARDWARE\MIxN\bsp_C1X2G.h
 ..\obj\main.o: ..\HARDWARE\MIxN\bsp_D2X2B.h
 ..\obj\main.o: ..\HARDWARE\MIxN\bsp_M1X4.h

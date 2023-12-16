@@ -43,7 +43,7 @@ void C1X2G_CHENCK(uint16_t time,uint32_t num,LockTypedef SwitchType)
 				Latch_C1X2_StateA(time);
 				Latch_C1X2_StateB(time);
 			}
-			else if(lock == nolock)
+			else if(SwitchType == nolock)
 			{
 				NonLatch_C1X2_StateA(time);
 				NonLatch_C1X2_StateA(time);

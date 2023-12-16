@@ -22,19 +22,23 @@ Dialog DLL:      TCM.DLL V1.53.0.0
  
 <h2>Project:</h2>
 D:\Users\Admin\Desktop\TB-OSW-DRV CODE\USER\Template.uvprojx
-Project File Date:  12/15/2023
+Project File Date:  12/16/2023
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\ProgramFiles\Keil5\ARM\ARMCC\Bin'
 Build target 'Target 1'
-compiling bsp_D2X2B.c...
-compiling bsp_S1X4.c...
-compiling bsp_M1X4.c...
-compiling bsp_S1X8.c...
+compiling main.c...
+main.c(128): warning:  #188-D: enumerated type mixed with another type
+  			C1X2G_CHENCK(20,1000,0);
+main.c(86): warning:  #177-D: variable "key"  was declared but never referenced
+  	uint8_t key = 0;
+main.c(87): warning:  #177-D: variable "auto_falg"  was declared but never referenced
+  	uint8_t auto_falg = 0;
+main.c: 3 warnings, 0 errors
 linking...
-Program Size: Code=13560 RO-data=656 RW-data=1468 ZI-data=2132  
+Program Size: Code=22804 RO-data=936 RW-data=1468 ZI-data=2116  
 FromELF: creating hex file...
-"..\OBJ\Template.axf" - 0 Error(s), 0 Warning(s).
+"..\OBJ\Template.axf" - 0 Error(s), 3 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -47,7 +51,7 @@ Package Vendor: Keil
   D:\ProgramFiles\Keil5\Keil\STM32F4xx_DFP\2.5.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:05
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>
