@@ -95,6 +95,7 @@ int main(void)
 	if(HAL_I2C_IsDeviceReady(&hi2c,0x40,10,1000) == HAL_OK) 
 		printf("PCA9698 SUCCES\n");
 	
+	//初始化PCA9698 IO口为输入
 	uint8_t Data[] ={0xff,0xff,0xff,0xff,0xff};
 	WireMoreByteToReg(IOC0_CMD,Data,5);
 	
