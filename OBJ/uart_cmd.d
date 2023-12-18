@@ -5,6 +5,7 @@
 ..\obj\uart_cmd.o: D:\ProgramFiles\Keil5\ARM\ARMCC\Bin\..\include\stdlib.h
 ..\obj\uart_cmd.o: D:\ProgramFiles\Keil5\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\uart_cmd.o: D:\ProgramFiles\Keil5\ARM\ARMCC\Bin\..\include\ctype.h
+..\obj\uart_cmd.o: D:\ProgramFiles\Keil5\ARM\ARMCC\Bin\..\include\stdbool.h
 ..\obj\uart_cmd.o: ..\HARDWARE\MIxN\bsp_MxN.h
 ..\obj\uart_cmd.o: ..\SYSTEM\sys\sys.h
 ..\obj\uart_cmd.o: ..\USER\stm32f4xx.h

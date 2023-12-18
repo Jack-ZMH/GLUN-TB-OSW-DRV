@@ -1,6 +1,6 @@
 #include "bsp_MxN.h"
 
-Switch_Status Switch = ON;
+Switch_Status Switch = OFF;
 
 /// @brief M1X1_GPIO_Init
 /// @param  

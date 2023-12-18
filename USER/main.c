@@ -83,8 +83,7 @@ void bsp_Init(void)
 
 int main(void)
 {
-	uint8_t key = 0;
-	uint8_t auto_falg = 0;
+
 	HAL_Init(); 
 	Stm32_Clock_Init(96,8,2,4);
 	delay_init(96);	

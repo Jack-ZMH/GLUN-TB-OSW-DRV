@@ -72,58 +72,64 @@ uint8_t CmdTable_Traversal(char *cmd)
 	
 	memset(&Cmd_Parame, 0, sizeof(Cmd_Parame)); //清空参数结构体
 
-	if(strchr(buff ,':')!=NULL) //判断命令是否有分隔符
+	if(strchr(buff ,':')!=NULL) //获取 ：的位置
 	{
 		char *token = strtok(buff, ":");
 		if(token!=NULL)
 		{
-			if(strlen(token)>MAX_CMD_LEN) return 1;
+			if(strlen(token)>MAX_CMD_LEN) 
+				return 1;
+			// 1、保存第一段指令
 			strncpy(Cmd_Parame.cmd,token,strlen(token));
 			Cmd_Parame.cmd[sizeof(Cmd_Parame.cmd) - 1] = '\0'; //手动添加结束符号
 			
-			char *parame = strtok(NULL, ":");
-			char *parame1 = strtok(NULL, ":");	
-			char *parame2 = strtok(NULL, ":");
+			char *parame1 = strtok(NULL, ":");
+			char *parame2 = strtok(NULL, ":");	
+			char *parame3 = strtok(NULL, ":");
 			
-            /* 获取光开关有无锁 */
-			if(strcmp(parame,"LOCK") == 0) 
+			// 2、保存第二段指令
+			if(strcmp(parame1,"LOCK") == 0) 
 				Cmd_Parame.type = lock;
-			else if(strcmp(parame,"NOLOCK") == 0)
+			else if(strcmp(parame1,"NOLOCK") == 0)
 				Cmd_Parame.type = nolock;
-			else if(isAllDigits(parame))
-				Cmd_Parame.timer = atoi(parame);
 			else 
 				return 1;
 			
-            /* 判断命令后面的参数否为纯字符 */
-			if(isAllLetters(parame1)){
-				if(strcmp(parame1,"A") == 0)
-					Cmd_Parame.status = A;
-				else if(strcmp(parame1,"B") == 0)
-					Cmd_Parame.status = B;
-				else if(strcmp(parame1,"C") == 0)
-					Cmd_Parame.status = C;
-				else if(strcmp(parame1,"D") == 0)
-					Cmd_Parame.status = D;
-				else if(strcmp(parame1,"E") == 0)
-					Cmd_Parame.status = E;
-				else if(strcmp(parame1,"F") == 0)
-					Cmd_Parame.status = F;
-				else if(strcmp(parame1,"G") == 0)
-					Cmd_Parame.status = G;
-				else if(strcmp(parame1,"H") == 0)
-					Cmd_Parame.status = H;
-				else 
-					return 1;
+			// 3、保存第三段指令
+			// 4、保存第四段指令
+			if(strcmp(parame2,"AUTO") == 0){
+				Cmd_Parame.fun = Auto;
+				Cmd_Parame.sw = true;
 			}
-            /* 判断命令后面的参数否为纯数字 */
-			else if(isAllDigits(parame1)){
-				Cmd_Parame.parame1 = (parame1 != NULL) ? atoi(parame1) : 0;
-			    Cmd_Parame.parame2 = (parame2 != NULL) ? atoi(parame2) : 0;
+			else if(strcmp(parame2,"SET") == 0){
+				Cmd_Parame.fun = Set;
+				Cmd_Parame.timer = (parame3 != NULL) ? atoi(parame3) : 0;
 			}
-			else{ 
-				return 1;
+			else if(strcmp(parame2,"STATUS") == 0){
+				
+				if(isAllLetters(parame3)){
+					if(strcmp(parame3,"A") == 0)
+						Cmd_Parame.status = A;
+					else if(strcmp(parame3,"B") == 0)
+						Cmd_Parame.status = B;
+					else if(strcmp(parame3,"C") == 0)
+						Cmd_Parame.status = C;
+					else if(strcmp(parame3,"D") == 0)
+						Cmd_Parame.status = D;
+					else if(strcmp(parame3,"E") == 0)
+						Cmd_Parame.status = E;
+					else if(strcmp(parame3,"F") == 0)
+						Cmd_Parame.status = F;
+					else if(strcmp(parame3,"G") == 0)
+						Cmd_Parame.status = G;
+					else if(strcmp(parame3,"H") == 0)
+						Cmd_Parame.status = H;
+					else 
+						return 1;
+				}
+				else return 1;
 			}
+			else return 1;
 		}
 	}
 	else //如果没有分隔符直接执行命令

@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <ctype.h>
+#include <stdbool.h>
+
 #include "bsp_MxN.h"
 #include "sys.h"
 
@@ -30,15 +32,23 @@ typedef struct Cmd_Class
 	
 }Cmd_Class;
 
+typedef enum Sw_Fun
+{
+	Auto = 0,
+	Set,
+	Status
+}Sw_Fun;
+
 typedef struct CMD_ParameTypeDef
 {
-	string cmd;
-	LockTypedef type;
-	uint16_t timer;
-	SwitchStatusTypedef status;
+	string cmd; //命令
+	LockTypedef type; //类型
+	Sw_Fun fun; //功能
+	bool sw;
+	uint16_t timer; //时间
+	SwitchStatusTypedef status; //状态	
 	uint16_t parame1;
 	uint32_t parame2;
-	
 }CMD_ParameTypeDef;
 
 /// @brief 
