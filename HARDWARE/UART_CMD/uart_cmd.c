@@ -9,12 +9,33 @@ static void extractCommand(const char *input, char *output, size_t outputSize);
 static int isAllLetters(const char *str);
 static int isAllDigits(const char *str);
 
+
+
+SwitchType switch_types[] = {
+    {"C1X2G",0},
+    {"D2X2B",1},
+	{"M1X1", 2},
+	{"M1X4", 3},
+	{"S1X4", 4},
+	{"S1X8", 5}
+    // 添加其他元素...
+};
+
 /// @brief 全局变量，存储已经注册命令
 LogicExeCmd_Class Cmd_Table = {
 								.cmd_list = NULL,
 								.cmd_num = 0,  
 								.cmdPreproccessCallBack = Cmd_PreproccessCallBack 
 };
+
+CMD_ParameTypeDef  Cmd_Parame = {
+									"\0",
+									LATCH,
+									AUTO,
+									OFF,
+									A,
+									500  //默认500ms切换一次
+								};
 
 /// @brief Logic_CmdFun
 /// @param cmdList 
@@ -52,10 +73,11 @@ uint8_t Logic_CmdFun(const Cmd_Class *cmdList,uint8_t listLen)
 /// @param listLen 
 uint8_t CmdTable_Traversal(char *cmd)
 {
+	bool falg = false;
 	char *cmd_initadrr = cmd;
-	static CMD_ParameTypeDef Cmd_Parame;
+	//static CMD_ParameTypeDef Cmd_Parame;
 	char buff[50];
-	
+	string temp_cmd;
 	Cmd_Table.cmdPreproccessCallBack(cmd);
 	/* 剔除 \r\n */
     while(*cmd != '\0'){
@@ -69,79 +91,122 @@ uint8_t CmdTable_Traversal(char *cmd)
 	memset(buff,0,sizeof(buff));
 	extractCommand(cmd,buff,sizeof(buff)); //提取<>中的命令
 	if(buff[0] == '\0') return 1;
+		
+	memset(temp_cmd,0,sizeof(temp_cmd));
 	
-	memset(&Cmd_Parame, 0, sizeof(Cmd_Parame)); //清空参数结构体
-
 	if(strchr(buff ,':')!=NULL) //获取 ：的位置
 	{
 		char *token = strtok(buff, ":");
 		if(token!=NULL)
 		{
 			if(strlen(token)>MAX_CMD_LEN) 
-				return 1;
-			// 1、保存第一段指令
-			strncpy(Cmd_Parame.cmd,token,strlen(token));
-			Cmd_Parame.cmd[sizeof(Cmd_Parame.cmd) - 1] = '\0'; //手动添加结束符号
+				goto error;
+			strncpy(temp_cmd,token,strlen(token));
+			temp_cmd[sizeof(temp_cmd) - 1] = '\0'; //手动添加结束符号
 			
 			char *parame1 = strtok(NULL, ":");
 			char *parame2 = strtok(NULL, ":");	
 			char *parame3 = strtok(NULL, ":");
 			
-			// 2、保存第二段指令
-			if(strcmp(parame1,"LOCK") == 0) 
-				Cmd_Parame.type = lock;
-			else if(strcmp(parame1,"NOLOCK") == 0)
-				Cmd_Parame.type = nolock;
-			else 
-				return 1;
-			
-			// 3、保存第三段指令
-			// 4、保存第四段指令
-			if(strcmp(parame2,"AUTO") == 0){
-				Cmd_Parame.fun = Auto;
-				Cmd_Parame.sw = true;
-			}
-			else if(strcmp(parame2,"SET") == 0){
-				Cmd_Parame.fun = Set;
-				Cmd_Parame.timer = (parame3 != NULL) ? atoi(parame3) : 0;
-			}
-			else if(strcmp(parame2,"STATUS") == 0){
-				
-				if(isAllLetters(parame3)){
-					if(strcmp(parame3,"A") == 0)
-						Cmd_Parame.status = A;
-					else if(strcmp(parame3,"B") == 0)
-						Cmd_Parame.status = B;
-					else if(strcmp(parame3,"C") == 0)
-						Cmd_Parame.status = C;
-					else if(strcmp(parame3,"D") == 0)
-						Cmd_Parame.status = D;
-					else if(strcmp(parame3,"E") == 0)
-						Cmd_Parame.status = E;
-					else if(strcmp(parame3,"F") == 0)
-						Cmd_Parame.status = F;
-					else if(strcmp(parame3,"G") == 0)
-						Cmd_Parame.status = G;
-					else if(strcmp(parame3,"H") == 0)
-						Cmd_Parame.status = H;
-					else 
-						return 1;
+            if(parame1 != NULL){
+				if(strcmp(parame1,"LATCH") == 0) {
+					Cmd_Parame.type = LATCH;
+					falg = true;
 				}
-				else return 1;
+				else if(strcmp(parame1,"NONLATCH") == 0){
+					Cmd_Parame.type = NONLATCH;
+					falg = true;
+				}
+				else {
+					memset(Cmd_Parame.cmd,0,strlen(Cmd_Parame.cmd));
+					strncpy(Cmd_Parame.cmd,parame1,strlen(parame1));
+				}
 			}
-			else return 1;
+			if(parame2 != NULL){
+			
+				if(strcmp(parame2,"AUTO") == 0)
+				{
+					Cmd_Parame.option = AUTO;
+					if(parame3 != NULL){
+						if(strcmp(parame3,"ON") == 0){
+							Cmd_Parame.onoff = ON;
+							Switch = ON;
+						}
+						else if(strcmp(parame3,"OFF") == 0){
+							Cmd_Parame.onoff = OFF;
+							Switch = OFF;
+						}
+						else {
+							printf("Auto Cmd Error\n");
+							goto error;
+						}
+					}
+					else{
+						goto error;
+					}
+						
+				}
+				else if(strcmp(parame2,"STATUS") == 0)
+				{
+					Cmd_Parame.option = STATE;
+					/* 判断命令后面的参数否为纯字符 */
+					if(isAllLetters(parame3)){
+						if(strcmp(parame3,"A") == 0)
+							Cmd_Parame.state = A;
+						else if(strcmp(parame3,"B") == 0)
+							Cmd_Parame.state = B;
+						else if(strcmp(parame3,"C") == 0)
+							Cmd_Parame.state = C;
+						else if(strcmp(parame3,"D") == 0)
+							Cmd_Parame.state = D;
+						else if(strcmp(parame3,"E") == 0)
+							Cmd_Parame.state = E;
+						else if(strcmp(parame3,"F") == 0)
+							Cmd_Parame.state = F;
+						else if(strcmp(parame3,"G") == 0)
+							Cmd_Parame.state = G;
+						else if(strcmp(parame3,"H") == 0)
+							Cmd_Parame.state = H;
+						else {
+							printf("State Cmd Error\n");
+							goto error;
+						}
+							
+					}
+				}
+#if 0
+				else if(strcmp(parame2,"SET") == 0)
+				{
+					Cmd_Parame.option = SET;
+					if(parame3 != NULL){
+						if(isAllDigits(parame3))
+							Cmd_Parame.timer = (parame3 != NULL) ? atoi(parame3) : 500;
+		
+						printf("Set Timer:%d\n",Cmd_Parame.timer);
+					}
+				}
+#endif
+				else{ 
+					goto error;
+				}
+			}
+			else if(parame2 == NULL && falg){
+				falg = false;
+				goto error;
+			}
 		}
 	}
 	else //如果没有分隔符直接执行命令
 	{
-		if(strlen(buff)>MAX_CMD_LEN) return 1;
-		strncpy(Cmd_Parame.cmd,buff,strlen(cmd));
-		Cmd_Parame.cmd[sizeof(Cmd_Parame.cmd) - 1] = '\0'; //手动添加结束符号
+		if(strlen(buff)>MAX_CMD_LEN) 
+			goto error;
+		strncpy(temp_cmd,buff,strlen(cmd));
+		temp_cmd[sizeof(temp_cmd) - 1] = '\0'; //手动添加结束符号
 	}
 	
 	for(uint8_t i=0;i<Cmd_Table.cmd_num;i++)
     {
-        if(strcmp(Cmd_Parame.cmd, Cmd_Table.cmd_list[i].cmd)==0){  
+        if(strcmp(temp_cmd, Cmd_Table.cmd_list[i].cmd)==0){  
             Cmd_Table.cmd_list[i].option(&Cmd_Parame);
 			goto end; //执行完退出
         }   
@@ -150,7 +215,12 @@ uint8_t CmdTable_Traversal(char *cmd)
 	
 end:
 	memset(cmd,0,strlen(cmd));
+	printf(">");
 	return 0;
+	
+error:
+	printf("Cmd Error\r\n>");
+	return 1;
 }
 
 /// @brief 预处理命令

@@ -49,17 +49,17 @@
 
 void M1X4_GPIO_Init(void);
 
-void M1X4_CHENCK(uint16_t time,uint32_t num,LockTypedef SwitchType);
+void M1X4_CHENCK(uint16_t time,uint32_t num,uint8_t SwitchType);
 
-void M1X4_State_A(uint16_t time);
-void M1X4_State_B(uint16_t time);
-void M1X4_State_C(uint16_t time);
-void M1X4_State_D(uint16_t time);
+uint8_t M1X4_State_A(uint16_t time);
+uint8_t M1X4_State_B(uint16_t time);
+uint8_t M1X4_State_C(uint16_t time);
+uint8_t M1X4_State_D(uint16_t time);
 
-void NonLatching_M1X4State_A(uint16_t time);
-void NonLatching_M1X4State_B(uint16_t time);
-void NonLatching_M1X4State_C(uint16_t time);
-void NonLatching_M1X4State_D(uint16_t time);
+uint8_t NonLatching_M1X4State_A(uint16_t time);
+uint8_t NonLatching_M1X4State_B(uint16_t time);
+uint8_t NonLatching_M1X4State_C(uint16_t time);
+uint8_t NonLatching_M1X4State_D(uint16_t time);
 
 #endif
 

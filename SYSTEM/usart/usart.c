@@ -269,7 +269,7 @@ void USART1_IRQHandler(void)
 				}
 				Syn_Cnt = Cnt_Buff; //同步标记，为下次接收指令做准备
 				Cmd_flag = 1;
-				Switch = OFF; //任何指令下来，都会关闭当前正在执行的任务
+				//Switch = OFF; //任何指令下来，都会关闭当前正在执行的任务
 		}
 	}
 }

@@ -74,5 +74,12 @@
 ..\obj\ad517x_lib.o: ..\HARDWARE\TIMER\timer.h
 ..\obj\ad517x_lib.o: ..\SYSTEM\delay\delay.h
 ..\obj\ad517x_lib.o: ..\HARDWARE\ADC\adc.h
+..\obj\ad517x_lib.o: ..\HARDWARE\UART_CMD\uart_cmd.h
+..\obj\ad517x_lib.o: D:\ProgramFiles\Keil5\ARM\ARMCC\Bin\..\include\string.h
+..\obj\ad517x_lib.o: D:\ProgramFiles\Keil5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\obj\ad517x_lib.o: D:\ProgramFiles\Keil5\ARM\ARMCC\Bin\..\include\ctype.h
 ..\obj\ad517x_lib.o: D:\ProgramFiles\Keil5\ARM\ARMCC\Bin\..\include\stdbool.h
+..\obj\ad517x_lib.o: ..\HARDWARE\MIxN\bsp_MxN.h
+..\obj\ad517x_lib.o: ..\HARDWARE\NXP9868\bsp_nxp9698.h
 ..\obj\ad517x_lib.o: ..\HARDWARE\IIC\bsp_i2c.h
+..\obj\ad517x_lib.o: ..\HARDWARE\IIC\i2c_device.h

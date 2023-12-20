@@ -4,7 +4,7 @@
 #include "sys.h"
 #include "bsp_nxp9698.h"
 
-/// @brief M1X1_宏定�?
+/// @brief M1X1_宏定�?
 #define M1X1_GPIO_PIN           GPIO_PIN_2
 #define M1X1_GPIO_PORT          GPIOD
 #define M1X1_GPIO_CLK()         __HAL_RCC_GPIOD_CLK_ENABLE()
@@ -18,39 +18,33 @@
 #define M1X1_READ_PIN5          GPIO_Pin_4
 
 
+#define   C1X2G		0x00
+#define   D2X2B		0x01
+#define   M1X1		0x02
+#define   M1X4		0x03
+#define   S1X4		0x04
+#define   S1X8		0x05
 
-typedef enum Switch_Status
+
+typedef enum Typedef_Select
 {
-	OFF = 0,
-	ON
-}Switch_Status;
+	C1X2G_t = 0,
+	D2X2B_t,
+	M1X1_t,
+	M1X4_t,
+	S1X4_t,
+	S1X8_t
+}Typedef_Select;
 
 
-typedef enum LockTypedef
-{
-	lock  = 0,
-	nolock
-}LockTypedef;
+extern uint8_t Switch;
+extern Typedef_Select TYPEFEF_SELECT;
 
-typedef enum SwitchStatusTypedef
-{
-	A  = 0,
-	B,
-	C,
-	D,
-	E,
-	F,
-	G,
-	H
-}SwitchStatusTypedef;
-
-
-extern Switch_Status Switch;
 
 void M1X1_GPIO_Init(void);
 void M1X1_CHENCK(uint16_t time,uint32_t num);
-void M1X1_StateA(uint16_t time);
-void M1X1_StateB(uint16_t time);
+uint8_t M1X1_StateA(uint16_t time);
+uint8_t M1X1_StateB(uint16_t time);
 
 #endif
 

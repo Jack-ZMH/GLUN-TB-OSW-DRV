@@ -79,6 +79,7 @@
 ..\obj\uart_cmd.o: ..\HARDWARE\TIMER\timer.h
 ..\obj\uart_cmd.o: ..\SYSTEM\delay\delay.h
 ..\obj\uart_cmd.o: ..\HARDWARE\ADC\adc.h
+..\obj\uart_cmd.o: ..\HARDWARE\UART_CMD\uart_cmd.h
 ..\obj\uart_cmd.o: ..\HARDWARE\NXP9868\bsp_nxp9698.h
 ..\obj\uart_cmd.o: ..\HARDWARE\IIC\bsp_i2c.h
 ..\obj\uart_cmd.o: ..\HARDWARE\IIC\i2c_device.h

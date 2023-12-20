@@ -74,3 +74,12 @@
 ..\obj\timer.o: ..\HARDWARE\TIMER\timer.h
 ..\obj\timer.o: ..\SYSTEM\delay\delay.h
 ..\obj\timer.o: ..\HARDWARE\ADC\adc.h
+..\obj\timer.o: ..\HARDWARE\UART_CMD\uart_cmd.h
+..\obj\timer.o: D:\ProgramFiles\Keil5\ARM\ARMCC\Bin\..\include\string.h
+..\obj\timer.o: D:\ProgramFiles\Keil5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\obj\timer.o: D:\ProgramFiles\Keil5\ARM\ARMCC\Bin\..\include\ctype.h
+..\obj\timer.o: D:\ProgramFiles\Keil5\ARM\ARMCC\Bin\..\include\stdbool.h
+..\obj\timer.o: ..\HARDWARE\MIxN\bsp_MxN.h
+..\obj\timer.o: ..\HARDWARE\NXP9868\bsp_nxp9698.h
+..\obj\timer.o: ..\HARDWARE\IIC\bsp_i2c.h
+..\obj\timer.o: ..\HARDWARE\IIC\i2c_device.h

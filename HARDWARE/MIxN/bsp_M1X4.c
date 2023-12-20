@@ -34,38 +34,59 @@ void M1X4_GPIO_Init(void)
 /// @brief 重复检测
 /// @param time 
 /// @param num 
-void M1X4_CHENCK(uint16_t time,uint32_t num,LockTypedef SwitchType)
+void M1X4_CHENCK(uint16_t time,uint32_t num,uint8_t SwitchType)
 {	
+    uint32_t success = 0;
+	uint32_t fail = 0;
+	
+	uint8_t i = 0,j = 0,b = 0,t = 0;
     // 轮询切换四种状态
 	while(num--) {	
-		if(Switch){
-			 if(SwitchType == lock)
+		if(Switch == ON){
+			 if(SwitchType == LATCH)
 			 {
-				M1X4_State_A(time);
-				M1X4_State_B(time); 
-				M1X4_State_C(time); 
-				M1X4_State_D(time); 				 
+				i = M1X4_State_A(time);
+				j = M1X4_State_B(time); 
+				b = M1X4_State_C(time); 
+				t = M1X4_State_D(time);
+                if(i||j||b||t)
+                    fail++;
+                else 
+                    success++;				 
 			 }
-			 else 
+			 else if(SwitchType == NONLATCH)
 			 {
-				NonLatching_M1X4State_A(time);
-			    NonLatching_M1X4State_B(time);
-			    NonLatching_M1X4State_C(time);
-			    NonLatching_M1X4State_D(time);
+				i = NonLatching_M1X4State_A(time);
+			    j = NonLatching_M1X4State_B(time);
+			    b = NonLatching_M1X4State_C(time);
+			    t = NonLatching_M1X4State_D(time);
+                if(i||j||b||t)
+                    fail++;
+                else 
+                    success++;
 			 }
-            
+             else{
+                printf("Switch Type Error\n");
+             }
 		}
-		else {
-		
-			printf("C1X2G Switch:%d\n",Switch);
-			num = 0;
+        else if(Switch == OFF){
+            num = 0;
+            printf("C1X2G Switch:OFF\n");
+			printf("M1X4 Auto Success Num %d ; Fail Num %d \n",success,fail);	
+			break;
+        }
+		if(num++  == 0 ){
+			Switch = OFF;
+            printf("Test count overflow,Text Stop\n");
+			printf("M1X4 Auto Success Num %d ; Fail Num %d \n",success,fail);	
+			break;
 		}
 	}   
 }
 
 /// @brief M1X4_State_A
 /// @param  
-void M1X4_State_A(uint16_t time)
+uint8_t M1X4_State_A(uint16_t time)
 {
     M1X4_GPIO_PIN1_L(); 
     M1X4_GPIO_PIN8_H();
@@ -73,15 +94,19 @@ void M1X4_State_A(uint16_t time)
     M1X4_GPIO_PIN28_H();
     delay_ms(time);
     if(READ_TwoPin(M1X4_READ_PORT1,M1X4_READ_PIN4,M1X4_READ_PIN5) ||
-       READ_TwoPin(M1X4_READ_PORT2,M1X4_READ_PIN24,M1X4_READ_PIN25))
+       READ_TwoPin(M1X4_READ_PORT2,M1X4_READ_PIN24,M1X4_READ_PIN25)){
         printf("M1X4 State A Error\n");
-    else
+        return 1;
+       }
+    else{
         printf("M1X4 State A Normel\n");
+        return 0;
+    }    
 }
 
 /// @brief M1X4_State_B
 /// @param  
-void M1X4_State_B(uint16_t time)
+uint8_t M1X4_State_B(uint16_t time)
 {
     M1X4_GPIO_PIN1_H(); 
     M1X4_GPIO_PIN8_L();
@@ -89,15 +114,19 @@ void M1X4_State_B(uint16_t time)
     M1X4_GPIO_PIN28_H();
     delay_ms(time);
     if(READ_TwoPin(M1X4_READ_PORT1,M1X4_READ_PIN2,M1X4_READ_PIN7) ||
-        READ_TwoPin(M1X4_READ_PORT2,M1X4_READ_PIN24,M1X4_READ_PIN25))
-        printf("M1X4 State:B Error\n");
-    else 
-        printf("M1X4 State:B Normel\n");
+        READ_TwoPin(M1X4_READ_PORT2,M1X4_READ_PIN24,M1X4_READ_PIN25)){
+        printf("M1X4 State B Error\n");
+        return 1;
+       }
+    else{
+        printf("M1X4 State B Normel\n");
+        return 0;
+    } 
 }
 
 /// @brief M1X4_State_C
 /// @param  
-void M1X4_State_C(uint16_t time)
+uint8_t M1X4_State_C(uint16_t time)
 {
     M1X4_GPIO_PIN1_L(); 
     M1X4_GPIO_PIN8_H();
@@ -105,15 +134,19 @@ void M1X4_State_C(uint16_t time)
     M1X4_GPIO_PIN28_L();
     delay_ms(time);
     if(READ_TwoPin(M1X4_READ_PORT1,M1X4_READ_PIN4,M1X4_READ_PIN5) ||
-       READ_TwoPin(M1X4_READ_PORT2,M1X4_READ_PIN22,M1X4_READ_PIN27))
-        printf("M1X4 State:C Error\n");
-    else 
-        printf("M1X4 State:C Normel\n");
+       READ_TwoPin(M1X4_READ_PORT2,M1X4_READ_PIN22,M1X4_READ_PIN27)){
+        printf("M1X4 State C Error\n");
+        return 1;
+       }
+    else{
+        printf("M1X4 State C Normel\n");
+        return 0;
+    } 
 }
 
 /// @brief M1X4_State_D
 /// @param  
-void M1X4_State_D(uint16_t time)
+uint8_t M1X4_State_D(uint16_t time)
 {
     M1X4_GPIO_PIN1_H(); 
     M1X4_GPIO_PIN8_L();
@@ -121,15 +154,19 @@ void M1X4_State_D(uint16_t time)
     M1X4_GPIO_PIN28_L();
     delay_ms(time);
     if(READ_TwoPin(M1X4_READ_PORT1,M1X4_READ_PIN2,M1X4_READ_PIN7) ||
-       READ_TwoPin(M1X4_READ_PORT2,M1X4_READ_PIN22,M1X4_READ_PIN27))
-        printf("M1X4 State:C Error\n");
-    else 
-        printf("M1X4 State:C Normel\n");
+       READ_TwoPin(M1X4_READ_PORT2,M1X4_READ_PIN22,M1X4_READ_PIN27)){
+        printf("M1X4 State D Error\n");
+        return 1;
+       }
+    else{
+        printf("M1X4 State D Normel\n");
+        return 0;
+    } 
 }
 
 /// @brief NonLatching_M1X4State_A
 /// @param  
-void NonLatching_M1X4State_A(uint16_t time)
+uint8_t NonLatching_M1X4State_A(uint16_t time)
 {
 	M1X4_GPIO_PIN1_L();
     M1X4_GPIO_PIN8_L();
@@ -137,15 +174,19 @@ void NonLatching_M1X4State_A(uint16_t time)
     M1X4_GPIO_PIN28_L();
 	delay_ms(time);
     if(READ_TwoPin(M1X4_READ_PORT1,M1X4_READ_PIN4,M1X4_READ_PIN5) ||
-       READ_TwoPin(M1X4_READ_PORT2,M1X4_READ_PIN24,M1X4_READ_PIN25))
-        printf("M1X4 State A Error\n");
-    else
-        printf("M1X4 State A Normel\n");
+       READ_TwoPin(M1X4_READ_PORT2,M1X4_READ_PIN24,M1X4_READ_PIN25)){
+        printf("NonLatching M1X4 State A Error\n");
+        return 1;
+       }
+    else{
+        printf("NonLatching M1X4 State A Normel\n");
+        return 0;
+    }
 }
 
 /// @brief NonLatching_M1X4State_B
 /// @param  
-void NonLatching_M1X4State_B(uint16_t time)
+uint8_t NonLatching_M1X4State_B(uint16_t time)
 {
 	M1X4_GPIO_PIN1_H();
     M1X4_GPIO_PIN8_L();
@@ -153,15 +194,19 @@ void NonLatching_M1X4State_B(uint16_t time)
     M1X4_GPIO_PIN28_L();
 	delay_ms(time);
     if(READ_TwoPin(M1X4_READ_PORT1,M1X4_READ_PIN2,M1X4_READ_PIN7) ||
-        READ_TwoPin(M1X4_READ_PORT2,M1X4_READ_PIN24,M1X4_READ_PIN25))
-        printf("M1X4 State:B Error\n");
-    else 
-        printf("M1X4 State:B Normel\n");
+        READ_TwoPin(M1X4_READ_PORT2,M1X4_READ_PIN24,M1X4_READ_PIN25)){
+        printf("NonLatching M1X4 State B Error\n");
+        return 1;
+       }
+    else{
+        printf("NonLatching M1X4 State B Normel\n");
+        return 0;
+    }
 }
 
 /// @brief NonLatching_M1X4State_C
 /// @param  
-void NonLatching_M1X4State_C(uint16_t time)
+uint8_t NonLatching_M1X4State_C(uint16_t time)
 {
 	M1X4_GPIO_PIN1_L();
     M1X4_GPIO_PIN8_L();
@@ -169,15 +214,19 @@ void NonLatching_M1X4State_C(uint16_t time)
     M1X4_GPIO_PIN28_L();
 	delay_ms(time);
     if(READ_TwoPin(M1X4_READ_PORT1,M1X4_READ_PIN4,M1X4_READ_PIN5) ||
-       READ_TwoPin(M1X4_READ_PORT2,M1X4_READ_PIN22,M1X4_READ_PIN27))
-        printf("M1X4 State:C Error\n");
-    else 
-        printf("M1X4 State:C Normel\n");
+       READ_TwoPin(M1X4_READ_PORT2,M1X4_READ_PIN22,M1X4_READ_PIN27)){
+        printf("NonLatching M1X4 State C Error\n");
+        return 1;
+       }
+    else{
+        printf("NonLatching M1X4 State C Normel\n");
+        return 0;
+    }
 }
 
 /// @brief NonLatching_M1X4State_D
 /// @param  
-void NonLatching_M1X4State_D(uint16_t time)
+uint8_t NonLatching_M1X4State_D(uint16_t time)
 {
 	M1X4_GPIO_PIN1_H();
     M1X4_GPIO_PIN8_L();
@@ -185,8 +234,12 @@ void NonLatching_M1X4State_D(uint16_t time)
     M1X4_GPIO_PIN28_L();
 	delay_ms(time);
     if(READ_TwoPin(M1X4_READ_PORT1,M1X4_READ_PIN2,M1X4_READ_PIN7) ||
-       READ_TwoPin(M1X4_READ_PORT2,M1X4_READ_PIN22,M1X4_READ_PIN27))
-        printf("M1X4 State:C Error\n");
-    else 
-        printf("M1X4 State:C Normel\n");
+       READ_TwoPin(M1X4_READ_PORT2,M1X4_READ_PIN22,M1X4_READ_PIN27)){
+        printf("NonLatching M1X4 State D Error\n");
+        return 1;
+       }
+    else{
+        printf("NonLatching M1X4 State D Normel\n");
+        return 0;
+    }
 }

@@ -47,12 +47,14 @@
 
 
 /* A组读取引脚宏定义 */
-#define S1X4_A_READ_PORT1                 IP1_CMD
+#define S1X4_A_READ_PIN4_PORT             IP1_CMD
 #define S1X4_A_READ_PIN4                  GPIO_Pin_2
+#define S1X4_A_READ_PIN7_PORT             IP1_CMD
 #define S1X4_A_READ_PIN7                  GPIO_Pin_3
 
-#define S1X4_A_READ_PORT2                 IP3_CMD 
+#define S1X4_A_READ_PIN2_PORT             IP3_CMD 
 #define S1X4_A_READ_PIN2                  GPIO_Pin_4
+#define S1X4_A_READ_PIN9_PORT             IP3_CMD 
 #define S1X4_A_READ_PIN9                  GPIO_Pin_5
 
 
@@ -69,18 +71,18 @@ void S1X4_GPIO_Init(void);
 
 /// @brief Lacthing Switch
 /// @param  
-void S1X4_CHENCK(uint16_t time,uint32_t num,LockTypedef SwitchType);
-void Latch_S1X4_COMP1(uint16_t time);
-void Latch_S1X4_COMP2(uint16_t time);
-void Latch_S1X4_COMP3(uint16_t time);
-void Latch_S1X4_COMP4(uint16_t time);
+void S1X4_CHENCK(uint16_t time,uint32_t num,uint8_t SwitchType);
+uint8_t Latch_S1X4_COMP1(uint16_t time);
+uint8_t Latch_S1X4_COMP2(uint16_t time);
+uint8_t Latch_S1X4_COMP3(uint16_t time);
+uint8_t Latch_S1X4_COMP4(uint16_t time);
 
 
 /// @brief Non-Lacthing Switch
 /// @param 
-void NonLatch_S1X4_COMP1(uint16_t time);
-void NonLatch_S1X4_COMP2(uint16_t time);
-void NonLatch_S1X4_COMP3(uint16_t time);
-void NonLatch_S1X4_COMP4(uint16_t time);
+uint8_t NonLatch_S1X4_COMP1(uint16_t time);
+uint8_t NonLatch_S1X4_COMP2(uint16_t time);
+uint8_t NonLatch_S1X4_COMP3(uint16_t time);
+uint8_t NonLatch_S1X4_COMP4(uint16_t time);
 #endif
 

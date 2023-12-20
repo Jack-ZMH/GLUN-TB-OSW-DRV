@@ -38,6 +38,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f4xx_it.h"
+#include "bsp_key.h"
 
 /** @addtogroup STM32F4xx_HAL_Examples
   * @{
@@ -154,6 +155,7 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
   HAL_IncTick();
+  ProcessGPIOKeyTimer();
 }
 
 /******************************************************************************/

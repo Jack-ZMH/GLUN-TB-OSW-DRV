@@ -91,28 +91,35 @@
 #define S1X8_C_READ_PIN7_PORT             IP4_CMD
 #define S1X8_C_READ_PIN7                  GPIO_Pin_2
 #define S1X8_C_READ_PIN9_PORT             IP3_CMD
-#define S1X8_C_READ_PIN9                  GPIO_Pin_3
+#define S1X8_C_READ_PIN9                  GPIO_Pin_7
 
 
 void S1X8_GPIO_Init(void);
-void Latch_S1X8_COM_P1(uint16_t time);
-void Latch_S1X8_COM_P2(uint16_t time);
-void Latch_S1X8_COM_P3(uint16_t time);
-void Latch_S1X8_COM_P4(uint16_t time);
-void Latch_S1X8_COM_P5(uint16_t time);
-void Latch_S1X8_COM_P6(uint16_t time);
-void Latch_S1X8_COM_P7(uint16_t time);
-void Latch_S1X8_COM_P8(uint16_t time);
-void Latch_S1X8_CHENCH(uint16_t time,uint32_t num,LockTypedef SwitchType);
+uint8_t Latch_S1X8_COM_P1(uint16_t time);
+uint8_t Latch_S1X8_COM_P2(uint16_t time);
+uint8_t Latch_S1X8_COM_P3(uint16_t time);
+uint8_t Latch_S1X8_COM_P4(uint16_t time);
+uint8_t Latch_S1X8_COM_P5(uint16_t time);
+uint8_t Latch_S1X8_COM_P6(uint16_t time);
+uint8_t Latch_S1X8_COM_P7(uint16_t time);
+uint8_t Latch_S1X8_COM_P8(uint16_t time);
+void Latch_S1X8_CHENCH(uint16_t time,uint32_t num,uint8_t SwitchType);
 
-void NonLatch_S1X8_COM_P1(uint16_t time);
-void NonLatch_S1X8_COM_P2(uint16_t time);
-void NonLatch_S1X8_COM_P3(uint16_t time);
-void NonLatch_S1X8_COM_P4(uint16_t time);
-void NonLatch_S1X8_COM_P5(uint16_t time);
-void NonLatch_S1X8_COM_P6(uint16_t time);
-void NonLatch_S1X8_COM_P7(uint16_t time);
-void NonLatch_S1X8_COM_P8(uint16_t time);
+uint8_t NonLatch_S1X8_COM_P1(uint16_t time);
+uint8_t NonLatch_S1X8_COM_P2(uint16_t time);
+uint8_t NonLatch_S1X8_COM_P3(uint16_t time);
+uint8_t NonLatch_S1X8_COM_P4(uint16_t time);
+uint8_t NonLatch_S1X8_COM_P5(uint16_t time);
+uint8_t NonLatch_S1X8_COM_P6(uint16_t time);
+uint8_t NonLatch_S1X8_COM_P7(uint16_t time);
+uint8_t NonLatch_S1X8_COM_P8(uint16_t time);
+
+void S1X8_A_GROUP_P1(void);
+void S1X8_A_GROUP_P2(void);
+void S1X8_B_GROUP_P1(void);
+void S1X8_B_GROUP_P2(void);
+void S1X8_C_GROUP_P1(void);
+void S1X8_C_GROUP_P2(void);
 
 #endif
 

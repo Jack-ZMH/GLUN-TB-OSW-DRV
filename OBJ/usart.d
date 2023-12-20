@@ -74,6 +74,11 @@
 ..\obj\usart.o: ..\SYSTEM\sys\sys.h
 ..\obj\usart.o: ..\SYSTEM\delay\delay.h
 ..\obj\usart.o: ..\HARDWARE\ADC\adc.h
+..\obj\usart.o: ..\HARDWARE\UART_CMD\uart_cmd.h
+..\obj\usart.o: D:\ProgramFiles\Keil5\ARM\ARMCC\Bin\..\include\string.h
+..\obj\usart.o: D:\ProgramFiles\Keil5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\obj\usart.o: D:\ProgramFiles\Keil5\ARM\ARMCC\Bin\..\include\ctype.h
+..\obj\usart.o: D:\ProgramFiles\Keil5\ARM\ARMCC\Bin\..\include\stdbool.h
 ..\obj\usart.o: ..\HARDWARE\MIxN\bsp_MxN.h
 ..\obj\usart.o: ..\HARDWARE\NXP9868\bsp_nxp9698.h
 ..\obj\usart.o: ..\HARDWARE\IIC\bsp_i2c.h

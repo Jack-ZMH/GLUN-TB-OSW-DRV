@@ -100,6 +100,8 @@ extern uint8_t IO_1[1];
 #include "timer.h"
 #include "delay.h"
 #include "adc.h"
+#include "uart_cmd.h"
+
 
 
 void Stm32_Clock_Init(u32 plln,u32 pllm,u32 pllp,u32 pllq);// ±÷”œµÕ≥≈‰÷√

@@ -20,4 +20,8 @@
 
 void KEY_GPIO_Init(void);
 u8 KEY_Scan(u8 mode);
+void ProcessGPIOKeyTimer(void);
+
+extern bool sel_falg;
+extern Typedef_Select TYPEFEF_SELECT;
 #endif

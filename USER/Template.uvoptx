@@ -158,17 +158,27 @@
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>pData</ItemText>
+          <ItemText>parame</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>dir</ItemText>
+          <ItemText>CmdBuffer</ItemText>
         </Ww>
         <Ww>
           <count>2</count>
           <WinNumber>1</WinNumber>
-          <ItemText>buff</ItemText>
+          <ItemText>Cmd_Parame.type</ItemText>
+        </Ww>
+        <Ww>
+          <count>3</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>TYPEFEF_SELECT,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>4</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>parame-&gt;type</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>
