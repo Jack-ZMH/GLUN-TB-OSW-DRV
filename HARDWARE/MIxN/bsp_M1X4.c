@@ -41,7 +41,7 @@ void M1X4_CHENCK(uint16_t time,uint32_t num,uint8_t SwitchType)
 	
 	uint8_t i = 0,j = 0,b = 0,t = 0;
     // 轮询切换四种状态
-	while(num--) {	
+	while(num) {	
 		if(Switch == ON){
 			 if(SwitchType == LATCH)
 			 {

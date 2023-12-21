@@ -104,7 +104,7 @@ int main(void)
 	Cmd_Class cmdTable[]={
 							{"C1X2G",C1X2G_Chenck_Fun},
 							{"D2X2B",D2X2B_Chenck_Fun},
-							{"M1X4",M1X1_Chenck_Fun},
+							{"M1X1",M1X1_Chenck_Fun},
 							{"M1X4",M1X4_Chenck_Fun},
 							{"S1X4",S1X4_Chenck_Fun},
 							{"S1X8",S1X8_Chenck_Fun},
@@ -151,6 +151,7 @@ int main(void)
 				case M1X4	:M1X4_CHENCK(Cmd_Parame.timer,1,Cmd_Parame.type);break;
 				case S1X4	:S1X4_CHENCK(Cmd_Parame.timer,1,Cmd_Parame.type);break;
 				case S1X8	:Latch_S1X8_CHENCH(Cmd_Parame.timer,1,Cmd_Parame.type);break;
+				
 				default:break;
 			
 			}

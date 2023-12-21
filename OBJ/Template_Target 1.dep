@@ -1,6 +1,6 @@
 Dependencies for Project 'Template', Target 'Target 1': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARMCC
-F (.\main.c)(0x6582B155)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\CORE -I ..\HALLIB\Inc -I ..\HALLIB\Inc\Legacy -I ..\USER -I ..\HARDWARE\ADC -I ..\HARDWARE\IIC -I ..\HARDWARE\KEY -I ..\HARDWARE\TIMER -I ..\CORE -I ..\HARDWARE\IIC -I ..\HARDWARE\AD517x -I ..\HARDWARE\NXP9868 -I ..\HARDWARE\UART_CMD -I ..\HARDWARE\MIxN --C99-ID:\ProgramFiles\Keil5\Keil\STM32F4xx_DFP\2.5.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -DSTM32F411xE -DUSE_HAL_DRIVER -DSTM32F411xE-o ..\obj\main.o --omf_browse ..\obj\main.crf --depend ..\obj\main.d)
+F (.\main.c)(0x6583F0D8)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\CORE -I ..\HALLIB\Inc -I ..\HALLIB\Inc\Legacy -I ..\USER -I ..\HARDWARE\ADC -I ..\HARDWARE\IIC -I ..\HARDWARE\KEY -I ..\HARDWARE\TIMER -I ..\CORE -I ..\HARDWARE\IIC -I ..\HARDWARE\AD517x -I ..\HARDWARE\NXP9868 -I ..\HARDWARE\UART_CMD -I ..\HARDWARE\MIxN --C99-ID:\ProgramFiles\Keil5\Keil\STM32F4xx_DFP\2.5.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -DSTM32F411xE -DUSE_HAL_DRIVER -DSTM32F411xE-o ..\obj\main.o --omf_browse ..\obj\main.crf --depend ..\obj\main.d)
 I (..\SYSTEM\sys\sys.h)(0x657FADD8)
 I (..\USER\stm32f4xx.h)(0x5CBE791D)
 I (..\USER\stm32f411xe.h)(0x5BD35396)
@@ -3329,7 +3329,7 @@ I (..\HARDWARE\MIxN\bsp_MxN.h)(0x65829182)
 I (..\HARDWARE\NXP9868\bsp_nxp9698.h)(0x65767492)
 I (..\HARDWARE\IIC\bsp_i2c.h)(0x656D4733)
 I (..\HARDWARE\IIC\i2c_device.h)(0x656D650B)
-F (..\HARDWARE\MIxN\bsp_M1X4.c)(0x65829486)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\CORE -I ..\HALLIB\Inc -I ..\HALLIB\Inc\Legacy -I ..\USER -I ..\HARDWARE\ADC -I ..\HARDWARE\IIC -I ..\HARDWARE\KEY -I ..\HARDWARE\TIMER -I ..\CORE -I ..\HARDWARE\IIC -I ..\HARDWARE\AD517x -I ..\HARDWARE\NXP9868 -I ..\HARDWARE\UART_CMD -I ..\HARDWARE\MIxN --C99-ID:\ProgramFiles\Keil5\Keil\STM32F4xx_DFP\2.5.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -DSTM32F411xE -DUSE_HAL_DRIVER -DSTM32F411xE-o ..\obj\bsp_m1x4.o --omf_browse ..\obj\bsp_m1x4.crf --depend ..\obj\bsp_m1x4.d)
+F (..\HARDWARE\MIxN\bsp_M1X4.c)(0x6583F126)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\CORE -I ..\HALLIB\Inc -I ..\HALLIB\Inc\Legacy -I ..\USER -I ..\HARDWARE\ADC -I ..\HARDWARE\IIC -I ..\HARDWARE\KEY -I ..\HARDWARE\TIMER -I ..\CORE -I ..\HARDWARE\IIC -I ..\HARDWARE\AD517x -I ..\HARDWARE\NXP9868 -I ..\HARDWARE\UART_CMD -I ..\HARDWARE\MIxN --C99-ID:\ProgramFiles\Keil5\Keil\STM32F4xx_DFP\2.5.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -DSTM32F411xE -DUSE_HAL_DRIVER -DSTM32F411xE-o ..\obj\bsp_m1x4.o --omf_browse ..\obj\bsp_m1x4.crf --depend ..\obj\bsp_m1x4.d)
 I (..\HARDWARE\MIxN\bsp_M1X4.h)(0x65828E7E)
 I (..\SYSTEM\sys\sys.h)(0x657FADD8)
 I (..\USER\stm32f4xx.h)(0x5CBE791D)
