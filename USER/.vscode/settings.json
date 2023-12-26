@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "bsp_nxp9698.h": "c",
+        "bsp_i2c.h": "c"
+    }
+}
